@@ -10,13 +10,13 @@ module DataMemory(clk, MemRead, MemWrite, Address, WriteData, ReadData);
   always @(posedge clk) begin
     if(MemWrite) begin
       Mem[Address] = WriteData;
-      $display("MemWrite at %1t, Mem[%1d] = %1d", $time, Address, WriteData);
+      $display("MemWrite at %0t, Mem[%0d] = %0d", $time, Address, WriteData);
     end
   end
   always @(*) begin
     if(MemRead) begin
       ReadData = Mem[Address];
-      $display("MemRead at %1t, ReadDataMem = Mem[%1d] = %1d", $time, Address, ReadData);
+      $display("MemRead at %0t, ReadDataMem = Mem[%0d] = %0d", $time, Address, ReadData);
     end
   end
 endmodule

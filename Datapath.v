@@ -112,6 +112,6 @@ module Datapath_tb();
     $finish;
   end
   initial begin
-    $monitor("Time = %t, ReadData1 = %d, ReadData2 = %d, ALU_result = %d, out_MemtoReg = %d", $time, ReadData1, ReadData2, ALU_result, out_MemtoReg);
+    $monitor("Time = %0t, op = %0d, ReadData1 = %0d, ReadData2 = %0d, ALU_result = %0d, out_MemtoReg = %0d", $time, op, ReadData1, ReadData2, ALU_result, out_MemtoReg);
   end
 endmodule

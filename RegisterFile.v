@@ -16,13 +16,13 @@ module RegisterFile(clk, RegWrite, ReadReg1, ReadReg2, WriteReg, WriteData, Read
   always @(*) begin
     ReadData1 = Mem[ReadReg1];
     ReadData2 = Mem[ReadReg2];
-    //$display("Time = %t, ReadData1 = %d, ReadData2 = %d", $time, ReadData1, ReadData2);
+    //$display("Time = %0t, ReadData1 = %0d, ReadData2 = %0d", $time, ReadData1, ReadData2);
   end
   
   always @(posedge clk) begin
     if(RegWrite) begin
       Mem[WriteReg] = WriteData;
-      $display("RegWrite at %1t, RegFile[%1d] = %1d", $time, WriteReg, WriteData);
+      $display("RegWrite at %0t, RegFile[%0d] = %0d", $time, WriteReg, WriteData);
     end
   end
   
