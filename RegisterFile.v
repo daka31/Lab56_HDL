@@ -1,10 +1,10 @@
 `timescale 1ns/100ps
 
-module RegisterFile(clk, RegWrite, ReadReg1, ReadReg2, WriteReg, WriteData, ReadData1, ReadData2);
+module RegisterFile(clk, RegWrite, ReadReg1, ReadReg2, WriteReg, WriteData, RD1, RD2);
   input clk, RegWrite;
   input [4:0] ReadReg1, ReadReg2, WriteReg;
   input [31:0] WriteData;
-  output reg [31:0] ReadData1, ReadData2;
+  output reg [31:0] RD1, RD2;
   
   reg [31:0] Mem [31:0];
   
@@ -14,15 +14,15 @@ module RegisterFile(clk, RegWrite, ReadReg1, ReadReg2, WriteReg, WriteData, Read
   end
   
   always @(*) begin
-    ReadData1 = Mem[ReadReg1];
-    ReadData2 = Mem[ReadReg2];
-    //$display("Time = %0t, ReadData1 = %0d, ReadData2 = %0d", $time, ReadData1, ReadData2);
+    RD1 = Mem[ReadReg1];
+    RD2 = Mem[ReadReg2];
+    //$display("Time = %0t, RD1 = %0d, RD2 = %0d", $time, RD1, RD2);
   end
   
   always @(posedge clk) begin
     if(RegWrite) begin
       Mem[WriteReg] = WriteData;
-      $display("RegWrite at %0t, RegFile[%0d] = %0d", $time, WriteReg, WriteData);
+      $display("%0t# @WRITE Reg[%0d] = %0d", $time, WriteReg, WriteData);
     end
   end
   
@@ -32,9 +32,9 @@ module RegisterFile_tb();
   reg clk, RegWrite;
   reg [4:0] ReadReg1, ReadReg2, WriteReg;
   reg [31:0] WriteData;
-  wire [31:0] ReadData1, ReadData2;
+  wire [31:0] RD1, RD2;
   
-  RegisterFile RFT(clk, RegWrite, ReadReg1, ReadReg2, WriteReg, WriteData, ReadData1, ReadData2);
+  RegisterFile RFT(clk, RegWrite, ReadReg1, ReadReg2, WriteReg, WriteData, RD1, RD2);
   
   initial begin
     forever #5 clk = ~clk;
@@ -72,7 +72,7 @@ module RegisterFile_tb();
     $finish;
   end
   initial begin
-    $monitor("Time = %t, WriteReg = %b, ReadReg1 = %d, ReadReg2 = %d, WriteReg = %d, WriteData = %h, ReadData1 = %h, ReadData2 = %h", $time, WriteReg, ReadReg1, ReadReg2, WriteReg, WriteData, ReadData1, ReadData2);
+    $monitor("Time = %t, WriteReg = %b, ReadReg1 = %d, ReadReg2 = %d, WriteReg = %d, WriteData = %h, RD1 = %h, RD2 = %h", $time, WriteReg, ReadReg1, ReadReg2, WriteReg, WriteData, RD1, RD2);
   end
   
 endmodule

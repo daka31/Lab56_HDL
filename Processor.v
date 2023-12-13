@@ -1,10 +1,10 @@
 `timescale 1ns/100ps
-module Processor(clk, op, rs, rt, rd, shamt, funct, is0, ReadData1, ReadData2, ALU_result, out_MemtoReg);
+module Processor(clk, op, rs, rt, rd, shamt, funct, is0, RD1, RD2, ALU_result, WD);
   input clk;
   input [5:0] op, funct;
   input [4:0] rs, rt, rd, shamt;
   output is0;
-  output [31:0] ReadData1, ReadData2, ALU_result, out_MemtoReg;
+  output [31:0] RD1, RD2, ALU_result, WD;
   
   wire RegDst, MemRead, MemWrite, MemtoReg, ALUSrc, RegWrite;
   wire [1:0] ALUOp;
@@ -14,7 +14,7 @@ module Processor(clk, op, rs, rt, rd, shamt, funct, is0, ReadData1, ReadData2, A
   
   ALU_ControlUnit ACU(ALUOp, ALUcontrol);
   
-  Datapath DP0(clk, op, rs, rt, rd, shamt, funct, RegDst, RegWrite, ALUSrc, ALUcontrol, MemRead, MemWrite, MemtoReg, is0, ReadData1, ReadData2, ALU_result, out_MemtoReg);
+  Datapath DP0(clk, op, rs, rt, rd, shamt, funct, RegDst, RegWrite, ALUSrc, ALUcontrol, MemRead, MemWrite, MemtoReg, is0, RD1, RD2, ALU_result, WD);
   
 endmodule
 
@@ -23,18 +23,18 @@ module Processor_tb();
   reg [5:0] op, funct;
   reg [4:0] rs, rt, rd, shamt;
   wire is0;
-  wire [31:0] ReadData1, ReadData2, ALU_result, out_MemtoReg;
+  wire [31:0] RD1, RD2, ALU_result, WD;
   
   reg RegDst, MemRead, MemWrite, MemtoReg, ALUSrc, RegWrite;
   reg [1:0] ALUOp;
   reg [3:0] ALUcontrol;
   
-  Processor P0(clk, op, rs, rt, rd, shamt, funct, is0, ReadData1, ReadData2, ALU_result, out_MemtoReg);
+  Processor P0(clk, op, rs, rt, rd, shamt, funct, is0, RD1, RD2, ALU_result, WD);
   
   initial begin
     forever #5 begin
     clk =~clk;
-    //$display("Time = %t, ReadData1 = %d, ReadData2 = %d, ALU_result = %d, out_MemtoReg = %d", $time, ReadData1, ReadData2, ALU_result, out_MemtoReg);
+    //$display("Time = %t, RD1 = %d, RD2 = %d, ALU_result = %d, WD = %d", $time, RD1, RD2, ALU_result, WD);
     end
   end
   
@@ -80,6 +80,6 @@ module Processor_tb();
     $finish;
   end
 //  initial begin
-//    $monitor("Time = %t, ReadData1 = %d, ReadData2 = %d, ALU_result = %d", $time, ReadData1, ReadData2, ALU_result);
+//    $monitor("Time = %t, RD1 = %d, RD2 = %d, ALU_result = %d", $time, RD1, RD2, ALU_result);
 //  end
 endmodule
