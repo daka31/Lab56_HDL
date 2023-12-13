@@ -32,40 +32,38 @@ module Processor_tb();
   Processor P0(clk, op, rs, rt, rd, shamt, funct, is0, RD1, RD2, ALU_result, WD);
   
   initial begin
-    forever #5 begin
-    clk =~clk;
+    clk = 0;  
+    forever #5 clk = ~clk;
     //$display("Time = %t, RD1 = %d, RD2 = %d, ALU_result = %d, WD = %d", $time, RD1, RD2, ALU_result, WD);
-    end
   end
   
   initial begin
-    clk = 0;  //add $1, $2, $3;
+    //add $1, $2, $3;
     op = 6'h01;
     rs = 5'd2;
     rt = 5'd3;
     rd = 5'd1;
     shamt = 5'd0;
     funct = 6'b0;
-    $display("Time = %1t, add %1d, %1d, %1d", $time, rd, rs, rt);
+    $display("%0t# add $%0d, $%0d, $%0d", $time, rd, rs, rt);
     
-    
-    #10
-    op = 6'h02; //sw $1, 0($2);
+    #10 //sw $1, 0($2)
+    op = 6'h02; 
     rs = 5'd2;
     rt = 5'd1;
     rd = 5'd0;
     shamt = 5'd0;
     funct = 6'b0;
-    $display("Time = %1t, sw %1d, 0(%1d)", $time, rt, rs);
+    $display("%0t# sw $%0d, 0($%0d)", $time, rt, rs);
     
-    #10
-    op = 6'h04; //lw $1, 0($2);
+    #10 //lw $1, 0($2);
+    op = 6'h04; 
     rs = 5'd2;
     rt = 5'd1;
     rd = 5'd0;
     shamt = 5'd0;
     funct = 6'b0;
-    $display("Time = %1t, lw %1d, 0(%1d)", $time, rt, rs);
+    $display("%0t# lw $%0d, 0($%0d)", $time, rt, rs);
     
     #10
     op = 6'h01; //add $1, $1, $2;
@@ -74,7 +72,7 @@ module Processor_tb();
     rd = 5'd1;
     shamt = 5'd0;
     funct = 6'b0;
-    $display("Time = %1t, add %1d, %1d, %1d", $time, rd, rs, rt);
+    $display("%0t# add $%0d, $%0d, $%0d", $time, rd, rs, rt);
     
     #10
     $finish;

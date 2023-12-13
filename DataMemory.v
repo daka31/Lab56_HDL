@@ -18,6 +18,8 @@ module DataMemory(clk, MemRead, MemWrite, Address, WriteData, ReadData);
       ReadData = Mem[Address];
       $display("%0t# @READ Mem[%0d] = %0d", $time, Address, ReadData);
     end
+    else
+      ReadData = 32'bz;    
   end
 endmodule
 
@@ -59,6 +61,6 @@ module DataMemory_tb();
     $finish;
   end
   initial begin
-    $monitor("Time = %t, Address = %d, MemRead = %b, MemWrite = %b, WriteData = %h, ReadData = %h", $time, Address, MemRead, MemWrite, WriteData, ReadData);
+    $monitor("%0t# Address = %0d, MemRead = %0b, MemWrite = %0b, WriteData = %0h, ReadData = %0h", $time, Address, MemRead, MemWrite, WriteData, ReadData);
   end
 endmodule
