@@ -1,35 +1,31 @@
 `timescale 1ns/100ps
-module Processor(clk, op, rs, rt, rd, shamt, funct, is0, RD1, RD2, ALU_result, WD);
+module Processor(clk, Instruction, is0, RD1, RD2, ALU_result, WD);
   input clk;
-  input [5:0] op, funct;
-  input [4:0] rs, rt, rd, shamt;
   output is0;
   output [31:0] RD1, RD2, ALU_result, WD;
+  input [31:0] Instruction;
   
   wire RegDst, MemRead, MemWrite, MemtoReg, ALUSrc, RegWrite;
   wire [1:0] ALUOp;
   wire [3:0] ALUcontrol;
   
-  ControlUnit CU(op, RegDst, MemRead, MemWrite, MemtoReg, ALUOp, ALUSrc, RegWrite);
+  ControlUnit CU(Instruction[31:26], RegDst, MemRead, MemWrite, MemtoReg, ALUOp, ALUSrc, RegWrite);
   
   ALU_ControlUnit ACU(ALUOp, ALUcontrol);
   
-  Datapath DP0(clk, op, rs, rt, rd, shamt, funct, RegDst, RegWrite, ALUSrc, ALUcontrol, MemRead, MemWrite, MemtoReg, is0, RD1, RD2, ALU_result, WD);
+  Datapath DP0(clk, Instruction[25:0], RegDst, RegWrite, ALUSrc, ALUcontrol, MemRead, MemWrite, MemtoReg, is0, RD1, RD2, ALU_result, WD);
   
 endmodule
 
 module Processor_tb();
   reg clk;
-  reg [5:0] op, funct;
-  reg [4:0] rs, rt, rd, shamt;
+  reg [5:0] op;
+  reg [4:0] rs, rt, rd;
   wire is0;
   wire [31:0] RD1, RD2, ALU_result, WD;
+  reg [31:0] Instruction;
   
-  reg RegDst, MemRead, MemWrite, MemtoReg, ALUSrc, RegWrite;
-  reg [1:0] ALUOp;
-  reg [3:0] ALUcontrol;
-  
-  Processor P0(clk, op, rs, rt, rd, shamt, funct, is0, RD1, RD2, ALU_result, WD);
+  Processor P0(clk, Instruction, is0, RD1, RD2, ALU_result, WD);
   
   initial begin
     clk = 0;  
@@ -43,26 +39,21 @@ module Processor_tb();
     rs = 5'd2;
     rt = 5'd3;
     rd = 5'd1;
-    shamt = 5'd0;
-    funct = 6'b0;
+    Instruction = {op, rs, rt, rd, 11'b0};
     $display("%0t# add $%0d, $%0d, $%0d", $time, rd, rs, rt);
     
     #10 //sw $1, 0($2)
     op = 6'h02; 
     rs = 5'd2;
     rt = 5'd1;
-    rd = 5'd0;
-    shamt = 5'd0;
-    funct = 6'b0;
+    Instruction = {op, rs, rt, 16'b0};
     $display("%0t# sw $%0d, 0($%0d)", $time, rt, rs);
     
     #10 //lw $1, 0($2);
     op = 6'h04; 
     rs = 5'd2;
     rt = 5'd1;
-    rd = 5'd0;
-    shamt = 5'd0;
-    funct = 6'b0;
+    Instruction = {op, rs, rt, 16'b0};
     $display("%0t# lw $%0d, 0($%0d)", $time, rt, rs);
     
     #10
@@ -70,8 +61,7 @@ module Processor_tb();
     rs = 5'd1;
     rt = 5'd2;
     rd = 5'd1;
-    shamt = 5'd0;
-    funct = 6'b0;
+    Instruction = {op, rs, rt, rd, 11'b0};
     $display("%0t# add $%0d, $%0d, $%0d", $time, rd, rs, rt);
     
     #10
