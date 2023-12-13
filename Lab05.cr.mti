@@ -1,0 +1,67 @@
+C:/Nam3/TKHTSHDL_CE213/ProjModelsim/Lab05/RegisterFile.v {1 {vlog -work work C:/Nam3/TKHTSHDL_CE213/ProjModelsim/Lab05/RegisterFile.v
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module RegisterFile
+-- Compiling module RegisterFile_tb
+
+Top level modules:
+	RegisterFile_tb
+
+} {} {}} C:/Nam3/TKHTSHDL_CE213/ProjModelsim/Lab05/ControlUnit.v {1 {vlog -work work C:/Nam3/TKHTSHDL_CE213/ProjModelsim/Lab05/ControlUnit.v
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module ControlUnit
+
+Top level modules:
+	ControlUnit
+
+} {} {}} C:/Nam3/TKHTSHDL_CE213/ProjModelsim/Lab05/ALU_32bit.v {1 {vlog -work work C:/Nam3/TKHTSHDL_CE213/ProjModelsim/Lab05/ALU_32bit.v
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module ALU_32bit
+
+Top level modules:
+	ALU_32bit
+
+} {} {}} C:/Nam3/TKHTSHDL_CE213/ProjModelsim/Lab05/SignExtend.v {1 {vlog -work work C:/Nam3/TKHTSHDL_CE213/ProjModelsim/Lab05/SignExtend.v
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module SignExtend
+
+Top level modules:
+	SignExtend
+
+} {} {}} C:/Nam3/TKHTSHDL_CE213/ProjModelsim/Lab05/ALU_ControlUnit.v {1 {vlog -work work C:/Nam3/TKHTSHDL_CE213/ProjModelsim/Lab05/ALU_ControlUnit.v
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module ALU_ControlUnit
+
+Top level modules:
+	ALU_ControlUnit
+
+} {} {}} C:/Nam3/TKHTSHDL_CE213/ProjModelsim/Lab05/DataMemory.v {1 {vlog -work work {C:\Nam3\TKHTSHDL_CE213\ProjModelsim\Lab05\DataMemory.v}
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module DataMemory
+-- Compiling module DataMemory_tb
+
+Top level modules:
+	DataMemory_tb
+
+} {} {}} C:/Nam3/TKHTSHDL_CE213/ProjModelsim/Lab05/Datapath.v {1 {vlog -work work C:/Nam3/TKHTSHDL_CE213/ProjModelsim/Lab05/Datapath.v
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module Datapath
+-- Compiling module Datapath_tb
+
+Top level modules:
+	Datapath_tb
+
+} {} {}} C:/Nam3/TKHTSHDL_CE213/ProjModelsim/Lab05/Mux21_5bit.v {1 {vlog -work work C:/Nam3/TKHTSHDL_CE213/ProjModelsim/Lab05/Mux21_5bit.v
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module Mux21_5bit
+
+Top level modules:
+	Mux21_5bit
+
+} {} {}} C:/Nam3/TKHTSHDL_CE213/ProjModelsim/Lab05/Mux21_32bit.v {1 {vlog -work work C:/Nam3/TKHTSHDL_CE213/ProjModelsim/Lab05/Mux21_32bit.v
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module Mux21_32bit
+
+Top level modules:
+	Mux21_32bit
+
+} {} {}}
