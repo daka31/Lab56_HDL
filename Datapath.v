@@ -76,11 +76,11 @@ module Datapath_tb();
     MemRead = 0;
     MemWrite = 0;
     MemtoReg = 1;
+    $display("%0t# add $%0d, $%0d, $%0d", $time, rd, rs, rt);
     
     #10
     rs = 5'd2;
     rt = 5'd1;
-    rd = 5'd0;
     Instruction = {rs, rt, 16'b0};
     RegDst = 0;
     RegWrite = 0;
@@ -88,7 +88,8 @@ module Datapath_tb();
     ALUcontrol = 4'b0101;
     MemRead = 0;
     MemWrite = 1;
-    MemtoReg = 0;
+    MemtoReg = 1'bx;
+    $display("%0t# sw $%0d, 0($%0d)", $time, rt, rs);
     
     #10
     rs = 5'd2;
@@ -101,7 +102,8 @@ module Datapath_tb();
     ALUcontrol = 4'b0101;
     MemRead = 1;
     MemWrite = 0;
-    MemtoReg = 0;
+    MemtoReg = 1;
+    $display("%0t# lw $%0d, 0($%0d)", $time, rt, rs);
 
 //    #10
 //    op = 6'h00;
