@@ -13,19 +13,34 @@ module Datapath(clk, op, rs, rt, rd, shamt, funct, RegDst, RegWrite, ALUSrc, ALU
   wire [31:0] out_signex, ReadDataMem; 
   output [31:0] ReadData1, ReadData2, ALU_result, out_MemtoReg;
 
-  Mux21_5bit mux0(RegDst, rt, rd, out_RegDst);
+  Mux_2to1 #(.nBit(5)) muxRegDst (
+    .out(out_RegDst),
+    .in0(rt),
+    .in1(rd),
+    .sel(RegDst)
+  );
 
   RegisterFile RF(clk, RegWrite, rs, rt, out_RegDst, out_MemtoReg, ReadData1, ReadData2);
 
   SignExtend se({rd, shamt, funct}, out_signex);
 
-  Mux21_32bit mux1(ALUSrc, ReadData2, out_signex, out_ALUSrc);
+  Mux_2to1 #(.nBit(32)) muxALUSrc (
+    .out(out_ALUSrc),
+    .in0(ReadData2),
+    .in1(out_signex),
+    .sel(ALUSrc)
+  );
 
   ALU_32bit ALU(ALUcontrol, ReadData1, out_ALUSrc, is0, ALU_result);
 
   DataMemory DM(clk, MemRead, MemWrite, ALU_result[5:0], ReadData2, ReadDataMem);
 
-  Mux21_32bit mux2(MemtoReg, ReadDataMem, ALU_result, out_MemtoReg);
+  Mux_2to1 #(.nBit(32)) muxMemtoReg (
+    .out(out_MemtoReg),
+    .in0(ReadDataMem),
+    .in1(ALU_result),
+    .sel(MemtoReg)
+  );
 endmodule
 
 module Datapath_tb();
